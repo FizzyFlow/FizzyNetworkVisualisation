@@ -1,0 +1,7 @@
+{
+    "cwd": "./",
+    "directory" : "bower_components",
+    "scripts": {
+        "postinstall": "sh .bower-postinstall.sh"
+    }
+}

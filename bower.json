@@ -1,0 +1,22 @@
+{
+  "name": "fizzy-network-visualisation",
+  "version": "1.0.0",
+  "homepage": "",
+  "authors": [
+    "jeka kiselyov <jeka911@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "normalize.css": "~3.0.3",
+    "console-polyfill": "~0.2.2",
+    "sigma": "^1.2.1"
+  }
+}

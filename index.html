@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Fizzy Network Visualisation</title>
+        
+        <link rel="stylesheet" href="bower_components/normalize.css/normalize.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fizzy_header">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div class="fizzy_icon">FizzyFlow<br>Network Visualisation</div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Data</div>
+                        <div class="panel-body">
+
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#tab_sample_data" aria-controls="tab_sample_data" role="tab" data-toggle="tab">Sample</a></li>
+                                <li role="presentation"><a href="#tab_load_from_file" aria-controls="tab_load_from_file" role="tab" data-toggle="tab">From File</a></li>
+                                <li role="presentation"><a href="#tab_listen" aria-controls="tab_listen" role="tab" data-toggle="tab">Listen to Broadcast</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="tab_sample_data">
+        
+                                    <h5>Predefined sample data</h5>
+                                    <div class="dropdown">
+                                        <button id="dLabel" type="button" data-toggle="dropdown" class="btn btn-default" aria-haspopup="true" aria-expanded="false">Select One <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" aria-labelledby="dLabel" id="select_sample_dropdown">
+                                            <li><a href="#">Action</a></li>
+                                            <li><a href="#">Action</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="tab_load_from_file">
+        
+                                    <h5>Load data from file</h5>
+                                    <button class="btn btn-default" onclick="$('#file').click();">Load from file</button>
+                                    <input type="file" id="file" name="files[]" multiple style="display: none"/>
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="tab_listen">
+
+                                    <h5>Listen to visualisation broadcast</h5>
+
+                                    <div class="form-group">
+                                        <label for="broadcast_ip">IP</label>
+                                        <input type="text" class="form-control" id="broadcast_ip" value="127.0.0.1" placeholder="127.0.0.1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="broadcast_port">Port</label>
+                                        <input type="text" class="form-control" id="broadcast_port" value="5588" placeholder="5588">
+                                    </div>
+
+                                    <button class="btn btn-default" id="broadcast_listen">Listen</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Timeframes
+                            <button type="button" class="btn btn-default" id="timeframes_play_button"><i class="glyphicon glyphicon-play"></i></button>
+                            <button type="button" class="btn btn-default" style="display: none;" id="timeframes_pause_button"><i class="glyphicon glyphicon-pause"></i></button>
+                        </div>
+                        <div style="height: 400px; overflow-y: scroll;">
+                            <div class="panel-body">
+                                <div class="list-group" id="timeframes_items">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-8">
+
+                    <div class="panel panel-default visualisation-panel">
+                        <div class="panel-heading">Visualisation
+                            <div class="pull-right">Move and zoom using your mouse</div>
+                            <button type="button" class="btn btn-sm btn-default" id="rearrange_graph_button"><i class="glyphicon glyphicon glyphicon-star-empty"></i> Re-arrange</button>
+                        </div>
+                        <div class="panel-body">
+                            <div id="container"></div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Legend</div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_0"></span> Undefined
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_1"></span> New
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_2"></span> Connecting
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_3"></span> Connected
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_4"></span> Active
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_5"></span> Failed
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_6"></span> Disconnected
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="legend_color" id="legend_color_7"></span> Banned
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+        
+
+
+        <!-- Load scripts last for page load speed -->
+        <script src="bower_components/console-polyfill/index.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/sigma/build/sigma.min.js"></script>
+
+
+        <script src="bower_components/sigma/build/plugins/sigma.plugins.animate.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="bower_components/sigma/build/plugins/sigma.layout.noverlap.min.js"></script>
+        <script src="bower_components/sigma/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+        
+
+
+        <script src="data/1.js"></script>
+        <script src="data/2.js"></script>
+
+        <script src="js/socket_listener.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
