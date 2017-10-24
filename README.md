@@ -16,5 +16,5 @@ Just open index.html in your browser.
 
 # Demo
 
-[![FizzyNetworkVisualisation Demo](https://img.youtube.com/vi/bkBqAc8G7UM/0.jpg)](https://youtu.be/bkBqAc8G7UM)
+* [Check out demo video](https://youtu.be/bkBqAc8G7UM)
 
