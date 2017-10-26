@@ -1,0 +1,20 @@
+{
+  "name": "console-polyfill",
+  "version": "0.2.3",
+  "description": "Browser console polyfill. Makes it safe to do console.log()-s etc always.",
+  "main": "index.js",
+  "ignore": [
+    "component.json"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/paulmillr/console-polyfill",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.2.3",
+    "commit": "37f0fb97fa3f02b4f617ed3dcb68e682e57c0e31"
+  },
+  "_source": "https://github.com/paulmillr/console-polyfill.git",
+  "_target": "~0.2.2",
+  "_originalSource": "console-polyfill"
+}
