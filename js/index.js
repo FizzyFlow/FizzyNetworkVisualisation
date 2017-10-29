@@ -7,7 +7,7 @@ class FizzyNetworkVisualisation {
             /// depends on edge status
             0: 'rgba(200,200,200,0.5)',///  PeerStatus.UNDEFINED
             1: 'rgba(127,127,255,0.5)', // PeerStatus.NEW
-            2: 'rgba(0,0,127,0.5)', // PeerStatus.CONNECTING
+            2: 'rgba(0,127,0,0.2)', // PeerStatus.CONNECTING
             3: 'rgba(0,0,255,0.6)', // PeerStatus.CONNECTED
             4: 'rgba(0,127,0,0.6)', // PeerStatus.ACTIVE
             5: 'rgba(127,0,0,0.5)', // PeerStatus.FAILED  
@@ -92,6 +92,18 @@ class FizzyNetworkVisualisation {
 
         this._isPlaying = false;
         clearInterval(this._playingInterval);
+    }
+
+
+    proccessMessages(messages) {
+        this.renderMessages(messages);
+    }
+
+    renderMessages(messages) {
+        $('#messages_items').html('');
+        for (var m of messages) {
+            $('#messages_items').append("<div class='row'><div class='col-md-2'>"+(''+m.time).split('T')[1]+"</div><div class='col-md-3'>"+m.from+"</div><div class='col-md-1'>&gt;&gt;</div><div class='col-md-3'>"+m.to+"</div><div class='col-md-3'>"+m.type+"</div></div>");
+        }
     }
 
     renderLegend() {

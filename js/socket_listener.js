@@ -13,6 +13,7 @@ class FizzyNetworkVisualisationSocketListener {
         console.log('Income data');
         data = JSON.parse(data);
         this._fizzyNetworkVisualisation.proccessData(data.data);
+        this._fizzyNetworkVisualisation.proccessMessages(data.messages);
     }
 
     stopListen() {
