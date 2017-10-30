@@ -317,6 +317,7 @@ class FizzyNetworkVisualisation {
             } catch(e) { 
                 let alreadyThere = this._sigma.graph.edges(edge.id);
                 alreadyThere.color = this._colors[edge.status];
+                alreadyThere.status = edge.status;
             }
         }
     }
