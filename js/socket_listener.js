@@ -12,7 +12,7 @@ class FizzyNetworkVisualisationSocketListener {
     incomingData(data) {
         console.log('Income data');
         data = JSON.parse(data);
-        this._fizzyNetworkVisualisation.proccessData(data.data);
+        this._fizzyNetworkVisualisation.proccessLiveData(data.data);
         this._fizzyNetworkVisualisation.proccessMessages(data.messages);
     }
 
@@ -31,6 +31,7 @@ class FizzyNetworkVisualisationSocketListener {
         this._ws.onopen = () => {
             console.log('open');
             this._ws.send(1);
+            this._fizzyNetworkVisualisation.startLiveData();
         };
 
         this._ws.onclose = () => {

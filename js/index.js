@@ -70,7 +70,7 @@ class FizzyNetworkVisualisation {
         });
 
         this._isPlaying = false;
-        this._playSpeed = 1000;
+        this._playSpeed = 200;
 
         $('#timeframes_play_button').click(()=>this.play());
         $('#timeframes_pause_button').click(()=>this.pause());
@@ -200,9 +200,10 @@ class FizzyNetworkVisualisation {
                 if (evt.target.readyState == FileReader.DONE) { // DONE == 2
                     try {
                         let data = JSON.parse(evt.target.result); 
-                        that.proccessData(data);  
+                        that.proccessData(data.data);  
+                        that.proccessMessages(data.messages);  
                     } catch (e) {
-
+                        console.log(e);
                     }         
                 }
             };
@@ -213,6 +214,14 @@ class FizzyNetworkVisualisation {
     updateTimeframeController() {
         $('.tframe').removeClass('active');
         $('#tframe_'+this._currentTimeframe).addClass('active');
+
+
+        let scrollTo = $('#tframe_'+this._currentTimeframe);
+        let container = $('#timeframes_items_scroller');
+
+        if (scrollTo.length) {
+            container.scrollTop(scrollTo.offset().top - container.offset().top + container.scrollTop());            
+        }
     }
 
     fillTimeframeController() {
@@ -320,6 +329,19 @@ class FizzyNetworkVisualisation {
                 alreadyThere.status = edge.status;
             }
         }
+    }
+
+    startLiveData() {
+        this._sigma.graph.clear();
+        this._currentTimeframe = 0;
+        this.fillTimeframeController();
+        this._data = [];        
+    }
+
+    proccessLiveData(data) {
+        this._data = data;
+        this.fillTimeframeController();
+        this.goToFrame(this._data.length - 1);
     }
 
     proccessData(data) {
