@@ -29,6 +29,15 @@ class FizzyNetworkVisualisation {
             scaleNodes: 1.3
         };
 
+
+        this._selectedNode = null;
+        this._sigma.bind("clickNode", (evt)=>{
+            this._selectedNode = evt.data.node;
+            this.renderNodeInformation();
+
+            return false;
+        });
+
         // Configure the algorithm
         var listener = this._sigma.configNoverlap(config);
 
@@ -72,6 +81,46 @@ class FizzyNetworkVisualisation {
         this.renderLegend();
     }
 
+    renderNodeInformation() {
+        if (this._selectedNode) {
+            $('#selected_node_addr').text(this._selectedNode.id);
+            let countIn = 0;
+            let countOut = 0;
+
+            let inboundTpl = $('#selected_node_inbound_template').html();
+            let outboundTpl = $('#selected_node_outbound_template').html();
+
+            $('#selected_node_inbound_list').html('');
+            $('#selected_node_outbound_list').html('');
+
+            let selectedNodeInboundHtml = '';
+            let selectedNodeOutboundHtml = '';
+
+            for (let edge of this._sigma.graph.edges()) {
+                if (edge.source == this._selectedNode.id) {
+                    countOut++;
+                    let html = outboundTpl;
+                    html = html.split('%addr%').join(edge.target);
+                    html = html.split('%status%').join(edge.status);
+                    selectedNodeOutboundHtml+=html;
+                }
+                if (edge.target == this._selectedNode.id) {
+                    countIn++;
+                    let html = inboundTpl;
+                    html = html.split('%addr%').join(edge.source);
+                    html = html.split('%status%').join(edge.status);
+                    selectedNodeInboundHtml+=html;
+                }
+
+            }
+            $('#selected_node_inbound_list').html(selectedNodeInboundHtml);
+            $('#selected_node_outbound_list').html(selectedNodeOutboundHtml);
+
+            $('#selected_node_inbound').text(countIn);
+            $('#selected_node_outbound').text(countOut);
+        }
+    }
+
     play() {
         $('#timeframes_play_button').hide();
         $('#timeframes_pause_button').show();
@@ -101,9 +150,12 @@ class FizzyNetworkVisualisation {
 
     renderMessages(messages) {
         $('#messages_items').html('');
+        let tpl = $('#messages_item_template').html();
+        let html = '';
         for (var m of messages) {
-            $('#messages_items').append("<div class='row'><div class='col-md-2'>"+(''+m.time).split('T')[1]+"</div><div class='col-md-3'>"+m.from+"</div><div class='col-md-1'>&gt;&gt;</div><div class='col-md-3'>"+m.to+"</div><div class='col-md-3'>"+m.type+"</div></div>");
+            html += tpl.split('%time%').join((''+m.time).split('T')[1]).split('%from%').join(m.from).split('%to%').join(m.to).split('%type%').join(m.type);
         }
+        $('#messages_items').html(html);
     }
 
     renderLegend() {
@@ -192,6 +244,7 @@ class FizzyNetworkVisualisation {
         this._sigma.startNoverlap();      
 
         this.updateTimeframeController();  
+        this.renderNodeInformation();
     }
 
     nextFrame() {
@@ -201,6 +254,7 @@ class FizzyNetworkVisualisation {
         this._sigma.startNoverlap();      
 
         this.updateTimeframeController();  
+        this.renderNodeInformation();
     }
 
     fillGraph() {
