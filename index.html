@@ -109,53 +109,78 @@
                             <button type="button" class="btn btn-sm btn-default" id="rearrange_graph_button"><i class="glyphicon glyphicon glyphicon-star-empty"></i> Re-arrange</button>
                         </div>
                         <div class="panel-body">
+                            <div class="legend">
+                                <div><span class="legend_color legend_color_0"></span> Undefined</div>
+                                <div><span class="legend_color legend_color_1"></span> New</div>
+                                <div><span class="legend_color legend_color_2"></span> Connecting</div>
+                                <div><span class="legend_color legend_color_3"></span> Connected</div>
+                                <div><span class="legend_color legend_color_4"></span> Active</div>
+                                <div><span class="legend_color legend_color_5"></span> Failed</div>
+                                <div><span class="legend_color legend_color_6"></span> Disconnected</div>
+                                <div><span class="legend_color legend_color_7"></span> Banned</div>
+                            </div>
                             <div id="container"></div>
                         </div>
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Legend</div>
-                        <div class="panel-body">
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_0"></span> Undefined
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_1"></span> New
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_2"></span> Connecting
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_3"></span> Connected
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_4"></span> Active
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_5"></span> Failed
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_6"></span> Disconnected
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="legend_color" id="legend_color_7"></span> Banned
-                                </div>
-                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Selected Node</div>
+                                <div class="panel-body">
 
-                        </div>
-                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <strong>Addr: </strong> <span id="selected_node_addr"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong># IN: </strong> <span id="selected_node_inbound"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <strong># OUT: </strong> <span id="selected_node_outbound"></span>
+                                        </div>
+                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div style="height: 100px; overflow-y: scroll;">
+                                                    <div id="selected_node_inbound_list">
+
+                                                    </div>
+                                                    <script type="text/html" id="selected_node_inbound_template">
+                                                    <div><span class="legend_color legend_color_%status%"></span> %addr%</div>
+                                                    </script>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div style="height: 100px; overflow-y: scroll;">
+                                                    <div id="selected_node_outbound_list">
+
+                                                    </div>
+                                                    <script type="text/html" id="selected_node_outbound_template">
+                                                    <div><span class="legend_color legend_color_%status%"></span> %addr%</div>
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
 
                     <div class="panel panel-default">
                         <div class="panel-heading">Messages</div>
                         <div class="panel-body">
 
-                            <div id="messages_items">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                    </div>
+                            <div style="height: 200px; overflow-y: scroll;">
+                                <div id="messages_items">
                                 </div>
+
+                                <script type="text/html" id="messages_item_template">
+                                <div class='col-md-2'>%time%</div><div class='col-md-3'>%from%</div><div class='col-md-1'>&gt;&gt;</div><div class='col-md-3'>%to%</div><div class='col-md-3'>%type%</div>
+                                </script>
                             </div>
 
                         </div>

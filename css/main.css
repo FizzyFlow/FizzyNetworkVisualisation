@@ -19,8 +19,39 @@
     height: 600px;
 }
 
+.legend {
+    z-index: 9999;
+    position: absolute;
+    margin: 5px 0 0 5px;
+}
+
 .legend_color {
-    width: 50px; 
+    width: 30px; 
     height: 20px; 
     display: inline-block;
+}
+
+.legend_color_0 {
+    background-color: rgba(200,200,200,0.5); /* PeerStatus.UNDEFINED */ 
+}
+.legend_color_1 {
+    background-color: rgba(127,127,255,0.5); /* PeerStatus.NEW */ 
+}
+.legend_color_2 {
+    background-color: rgba(0,127,0,0.2); /* PeerStatus.CONNECTING */ 
+}
+.legend_color_3 {
+    background-color: rgba(0,0,255,0.6); /* PeerStatus.CONNECTED */ 
+}
+.legend_color_4 {
+    background-color: rgba(0,127,0,0.6); /* PeerStatus.ACTIVE */ 
+}
+.legend_color_5 {
+    background-color: rgba(127,0,0,0.5); /* PeerStatus.FAILED */ 
+}
+.legend_color_6 {
+    background-color: rgba(0,0,0,0.5); /* PeerStatus.DISCONNECTED */ 
+}
+.legend_color_7 {
+    background-color: rgba(255,0,0,0.5); /* PeerStatus.BANNED */ 
 }
